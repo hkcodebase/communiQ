@@ -1,0 +1,549 @@
+body {
+    background-color: #f2f4f8;
+}
+
+body, .dropdown-menu {
+    font-size: 0.875rem;
+}
+
+a {
+    color: #3498DB;
+}
+/* -------------- Style for Login Page -------------- */
+.login-bg {
+    background: url(./images/login-bg.jpg) no-repeat center center;
+    background-size: cover;
+}
+
+.mask {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.login-form-block {
+    margin: auto !important;
+    width: 25%;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-top: 4px solid #3498db;
+    border-bottom: 4px solid #3498db;
+}
+
+.login-logo {
+    height: 50px;
+}
+
+@media (max-width: 768px) {
+    .login-form-block {
+        padding: 20px;
+        width: 98%;
+    }
+}
+/* .................. Style for Scrollbar ................... */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track-piece {
+    background-color: #DFE0E1;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #C4C4C5;
+    border: 1px solid #d6d6d6;
+}
+
+/* -------------- Override Bootstrap Styles -------------- */
+.navbar {
+    padding: 0rem 1rem;
+}
+
+.nav-link {
+    padding: 0.9rem 1rem;
+    color: #333333;
+}
+
+.nav-link.active > a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+
+.dropdown-item:focus, .dropdown-item:hover, .navbar-expand-lg .navbar-nav .nav-link:hover {
+    color: #000000;
+    text-decoration: none;
+    background-color: #f8f9fa;
+}
+
+.card {
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+
+.card-header, .card-body, .modal-body, .modal-header {
+    padding: 0.5rem 0.9rem;
+}
+
+
+/* -------------- Override Kendo Grid and Treeview Styles -------------- */
+.k-grid {
+    border-top: 1px solid #3498db !important;
+}
+
+.k-widget, .k-header, .k-grid-header, .k-grid .k-grouping-header, .k-grid td {
+    border-color: #e1e6ef;
+}
+
+.k-grid-header, .k-header {
+    background-color: #e1e6ef;
+}
+
+.k-grid-header th.k-header {
+    font-weight: 700;
+    padding: 8px;
+}
+
+.k-grid .k-icon {
+    opacity: 1;
+}
+
+.k-alt {
+    background-color: #f9fafb;
+}
+
+.k-grid tr td {
+    border-width: 1px 0 1px 0px;
+}
+
+.k-grid tr:hover {
+    background-color: #ebf6ff;
+}
+
+.k-grid tr:hover td {
+    border-width: 1px 0px 1px 0px;
+    border-color: #74B9EC;
+    border-left: 1px dotted transparent;
+}
+
+.k-grid td {
+    padding: 8px;
+}
+
+.k-grid .k-grouping-header {
+    background-color: #eaf5ff;
+    border-bottom: 1px solid #3498db;
+    color: #0780c2;
+    font-weight: 700;
+}
+
+.k-grouping-row td, td.k-group-cell, .k-resize-handle-inner {
+    background-color: #f5f8fd;
+}
+
+.k-grouping-header .k-group-indicator {
+    border-color: #3498db;
+}
+
+.k-filter-menu {
+    padding: 10px;
+}
+
+.k-multicheck-wrap .k-item {
+    line-height: 22px
+}
+
+.k-label {
+    font-weight: normal;
+}
+
+.k-pager-wrap {
+    background-color: transparent;
+}
+
+.fa.k-sprite, .fa.k-sprite::before {
+    font-size: 12px;
+    line-height: 12px;
+    vertical-align: middle;
+}
+
+.k-treeview .k-in {
+    padding: 0px;
+    width: 96%;
+}
+
+.k-treeview .k-state-hover, .k-treeview .k-state-hover:hover {
+    background-color: #ebf6ff;
+}
+
+.k-treeview .k-in.k-state-focused {
+    border-color: #3498DB;
+}
+
+.k-treeview .k-state-selected {
+    color: inherit;
+    background-color: #cae7ff;
+    font-weight: 600;
+}
+
+.k-multiselect.k-header {
+    border-radius: .2rem;
+}
+
+.k-multiselect-wrap {
+    padding-right: 14px;
+    min-height: 29px;
+    border-radius: .2rem;
+}
+
+.k-multiselect-wrap .k-input {
+    height: 29px;
+    line-height: 29px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.k-multiselect > .k-multiselect-wrap > .k-i-close {
+    margin-right: 1px;
+}
+
+.k-multiselect-wrap li {
+    margin: 1px 0 1px 1px;
+    padding: 1px 18px 1px 1px;
+    line-height: 1.25em;
+    font-size: 12px;
+    border: 0px;
+    background-color: #cae7ff;
+}
+
+.k-multiselect-wrap li span {
+    margin-right: 0px;
+}
+
+.k-multiselect-wrap .k-i-close {
+    font-size: inherit;
+    margin-right: 0px;
+}
+
+/* -------------- Multiselect Dropdown -------------- */
+span.multiselect-native-select {
+    position: relative
+}
+
+span.multiselect-native-select select {
+    border: 0 !important;
+    clip: rect(0 0 0 0) !important;
+    height: 1px !important;
+    margin: -1px -1px -1px -3px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    width: 1px !important;
+    left: 50%;
+    top: 30px
+}
+
+.multiselect-container {
+    position: absolute;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    max-height: 260px;
+    overflow-y: auto;
+    width: 100%;
+    min-width: 225px;
+}
+
+.multiselect-container .input-group {
+    margin: 5px;
+}
+
+.multiselect-container .multiselect-reset .input-group {
+    width: 93%;
+}
+
+.multiselect-container > li > a.multiselect-all label {
+    font-weight: 700;
+}
+
+.multiselect-container > li.multiselect-group label {
+    margin: 0;
+    padding: 3px 20px;
+    height: 100%;
+    font-weight: 700;
+}
+
+.multiselect-container > li.multiselect-group-clickable label {
+    cursor: pointer;
+}
+
+.multiselect-container > li > a {
+    color: inherit;
+    font-size: 90%;
+}
+
+.multiselect-container > li > a > label {
+    height: 100%;
+    cursor: pointer;
+    padding: 5px 10px 6px 10px;
+    width: 100%;
+}
+
+.multiselect-container > li > a > label.checkbox, .multiselect-container > li > a > label.radio {
+    margin: 0;
+}
+
+.btn-group > .btn-group:nth-child(2) > .multiselect.btn {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.form-inline .multiselect-container label.checkbox, .form-inline .multiselect-container label.radio {
+    padding: 3px 20px 3px 40px;
+}
+
+.form-inline .multiselect-container li a label.checkbox input[type=checkbox], .form-inline .multiselect-container li a label.radio input[type=radio] {
+    margin-left: -20px;
+    margin-right: 0
+}
+
+.multiselect.dropdown-toggle::after {
+    position: absolute;
+    top: 46%;
+    right: 8px;
+    border-top: .48em solid;
+    border-right: .25em solid transparent;
+    border-left: .25em solid transparent;
+}
+
+.multiselect-container > li.active {
+    color: #3498db; /*font-weight: 600;*/
+    background-color: transparent;
+}
+
+.multiselect-native-select .btn {
+    border: 1px solid #bfbfbf;
+    font-size: 12px;
+    background: #fff;
+    text-align: left;
+    height: 30px;
+    position: relative;
+}
+
+.last-multiselect-wrap .multiselect-container {
+    padding-bottom: 25px;
+}
+
+.ele-click {
+    cursor: pointer;
+}
+
+.multiselect-container > li > a > label.checkbox {
+    padding-left: 26px;
+}
+
+.multiselect-container li a label.checkbox input[type=checkbox] {
+    margin-left: -16px;
+}
+
+.customElementColumnSelectorWrap .multiselect-container {
+    min-width: 276px;
+}
+
+/* -------------- Style for Login Page -------------- */
+.login-bg {
+    background: url(../images/login-bg.jpg) no-repeat center center;
+    background-size: cover;
+}
+
+.mask {
+    background-color: rgba(0, 0, 0, 0.4);
+    height: 100vh;
+}
+
+.login-form-block {
+    border-radius: 8px;
+    border-top: 4px solid #3498db;
+    border-bottom: 4px solid #3498db;
+}
+
+.login-logo {
+    height: 50px;
+}
+
+/* -------------- Style for Top Navigation Bar -------------- */
+.logo {
+    height: 40px;
+}
+
+.navbar .dropdown-item {
+    padding: .5rem 1rem;
+}
+
+.active, .navbar-expand-lg .navbar-nav .active:hover {
+    color: #ffffff;
+    background-color: #3498DB;
+}
+
+/* -------------- Common Styles -------------- */
+.page-content {
+    margin-top: 50px;
+    line-height: 1.2;
+}
+
+.box-shadow {
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.16);
+}
+
+.border-blue {
+    border-color: #3498DB !important;
+}
+
+.bg-blue {
+    background-color: #3498DB;
+}
+
+.text-blue {
+    color: #3498DB;
+}
+
+.text-semibold {
+    font-weight: 600;
+}
+
+.font-90 {
+    font-size: 90%;
+}
+
+.btn-icon:hover {
+    color: #3498DB;
+}
+
+.ele-click {
+    cursor: pointer;
+}
+
+.c-default {
+    cursor: default !important;
+}
+
+.modal-exl {
+    max-width: 90%;
+}
+
+.check-input-big {
+    height: 14px;
+    width: 14px;
+}
+
+/* -------------- Styles for Home Page -------------- */
+.studyDetails-height {
+    height: 48vh;
+    overflow-y: auto;
+}
+
+.dataSelection-height {
+    height: 22vh;
+    overflow-y: auto;
+}
+
+.displayArea-height {
+    height: 76vh;
+    overflow-y: auto;
+}
+
+.exclusionGrid-height {
+    height: 71vh;
+    overflow-y: auto;
+}
+
+.chart-height {
+    height: 228px;
+}
+
+.graphPointTable td:last-child, .graphPointTable th:last-child {
+    text-align: center;
+}
+
+.subjectTree.k-treeview .k-in {
+    text-decoration: underline;
+}
+
+
+#tlyPageGuideToggles {
+    display: none;
+}
+
+#tlyPageGuideWrapper #tlyPageGuideToggles {
+    top: 0px;
+    width: 18px;
+}
+
+#ganttMoadalWithTable .modal-dialog,
+#modalWithTable .modal-dialog {
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 10%;
+}
+
+.multiselect-native-select .btn {
+    width: 100%;
+}
+
+.multiselect-native-select .btn-group {
+    display: block;
+}
+
+.k-grid .k-grid-toolbar {
+    display: none;
+}
+
+.card-body h6 {
+    max-width: 150px;
+}
+
+tr.variance-past td.finishDate {
+    color: red;
+}
+
+tr.variance-future td.finishDate {
+    color: green;
+}
+
+.dropdown-menu li a {
+    color: #333;
+}
+
+.tabList-wrapper .nav-item a.nav-link {
+    background-color: #545b62 !important;
+    color: #fff;
+    border-color: #dee2e6 #dee2e6 #dee2e6;
+    cursor: pointer;
+}
+
+.tabList-wrapper .nav-item a.nav-link.active {
+    background-color: #28a745 !important;
+    color: #fff;
+}
+
+.custom-cell .blue {
+    background-color: #CCC0DA;
+}
+
+.custom-cell .orange {
+    background-color: #FABF8F;
+}
+
+.custom-cell .red {
+    background-color: #DA9694;
+}
+
+.custom-cell .green {
+    background-color: #D8E4BC;
+}
+
+.custom-cell .unknown {
+    background-color: #808080;
+}

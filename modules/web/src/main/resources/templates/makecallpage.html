@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">  
+<head>  
+      
+    <title>make call</title>  
+</head>  
+<body>  
+<div th:replace="fragments/navbar :: navbar"></div>
+    <div class="container">
+		<div class="jumbotron">
+			<h3>Enter phone number, Example format: +911234567890</h3>
+			<h4>After click on initiate call button, you will get call on entered number, please add +91 before 10 digit mobile number</h4>
+			<h5>If your caller ID is verified (in Twilio system) then you will hear your name </h5>
+			<form  method="POST" action="#" th:action ="@{/makecall}" th:object="${callInputModel}">
+				<fieldset>
+					<div>
+						 <label for="toNumber" th:text="#{enterPhoneNumber}"> </label>
+        				  <input type="text" th:field="*{toNumber}" /> <button type="submit" name="save" th:text="#{call}"></button>
+        				  
+					</div>
+				</fieldset>				
+			</form>
+		</div>
+	</div>
+</body>  
+</html>

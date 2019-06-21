@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">  
+<head>  
+      
+    <title>Home</title>  
+</head>  
+<body>  
+<div th:replace="fragments/navbar :: navbar"></div>
+    <div class="container">
+		This demo will show-case following functionalities, click on
+		corresponding menu link for further details.
+
+		<ul>
+			<li>1. Receive call on number - <a th:href="@{/showmakecall}">Menu 1</a> </li> 
+			<li>2. Call waiting and routing (like call Centre) - <a th:href="@{/showcallcentre}">Menu 2</a></li>
+			<li>3. Identify caller identification like caller id etc - <a th:href="@{/showcallerid}">Menu 3</a></li>
+			<li>4. Divert call on certain number - <a th:href="@{/showcalldivert}">Menu 4</a></li> 
+			<li>5. All Call Details - <a th:href="@{/showcalls}">Menu 5</a></li>
+		</ul>
+	</div>  
+</body>  
+</html>

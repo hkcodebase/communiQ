@@ -1,0 +1,52 @@
+<div class="footer" th:fragment="footer" xmlns:th="http://www.thymeleaf.org">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/jquery-ui.min.js}"></script>
+    <script th:src="@{/js/popper.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/bootstrap2-toggle.min.js}"></script>
+    <script th:src="@{/js/bootstrap-dialog.js}"></script>
+
+    <script th:src="@{/js/moment-with-locales.min.js}"></script>
+    <script th:src="@{/js/jsrender.min.js}"></script>
+    <script th:src="@{/js/select2.min.js}"></script>
+
+    <script th:src="@{/js/high-chart/highcharts.js}"></script>
+    <script th:src="@{/js/high-chart/highstock.js}"></script>
+    <script th:src="@{/js/high-chart/exporting.js}"></script>
+    <script th:src="@{/js/high-chart/sunburst.js}"></script>
+    <script th:src="@{/js/high-chart/highcharts-3d.js}"></script>
+    <script th:src="@{/js/high-chart/highcharts.customEvents.min.js}"></script>
+
+    <script th:src="@{/js/lodash.js}"></script>
+    
+    <script type="text/javascript" th:src="@{/kendo-ui/js/kendo.all.min.js}"></script>
+    <script type="text/javascript" th:src="@{/kendo-ui/js/jszip.min.js}"></script>
+    <script th:src="@{/js/bootstrap-multiselect.min.js}"></script>
+    <!--  Sticky Sidebar  -->
+    <script type="text/javascript" th:src="@{/js/sticky-sidebar/rAF.js}"></script>
+    <script type="text/javascript" th:src="@{/js/sticky-sidebar/ResizeSensor.js}"></script>
+    <script type="text/javascript" th:src="@{/js/sticky-sidebar/sticky-sidebar.js}"></script>
+    <!--  End of Sticky Sidebar  -->
+
+    <script type="text/javascript">
+        /*<![CDATA[*/
+        $(function () {
+            (function initFilterSpyScroll() {
+                if (typeof (StickySidebar) === "function") {
+                    var containerSelector = '.right-panel';
+                    var sidebarSelector = "#sidebar";
+                    var innerWrapperSelector = '.sidebar__inner';
+                    if ($(containerSelector).length > 0 && $(sidebarSelector).length > 0 && $(innerWrapperSelector).length > 0) {
+                        var stickySidebar = new StickySidebar(sidebarSelector, {
+                            containerSelector: containerSelector,
+                            innerWrapperSelector: innerWrapperSelector,
+                            topSpacing: 50 + 15, //50=Height of Header
+                            bottomSpacing: 15
+                        });
+                    }
+                }
+            })();
+        });
+            /*]]>*/
+    </script>
+</div>

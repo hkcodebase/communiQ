@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title>make call</title>
+</head>
+<body>
+	<div class="container">
+		<h3>
+			Initiate call to your number from Make call page (<a
+				href="showmakecall">Menu 1</a>), If your number is verified in
+			Twilio System then you will hear your name
+		</h3>
+		<h4>List of verified number in Twilio System</h4>
+
+		<table class="table">
+			<tr>
+				<th>Phone Number</th>
+				<th>Caller ID</th>
+			</tr>
+			<tr th:each="contact: ${contactlist} ">
+				<td th:text="${contact.phoneNumber}"></td>
+				<td th:text="${contact.friendlyName}"></td>
+			</tr>
+		</table>
+
+	</div>
+</body>
+</html>
