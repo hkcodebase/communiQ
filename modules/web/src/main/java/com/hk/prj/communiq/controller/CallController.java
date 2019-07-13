@@ -211,7 +211,7 @@ public class CallController extends BaseService{
 		return modelAndView;
 	}
 
-	@RequestMapping("/showcalls")
+	@RequestMapping("/calls")
 	public ModelAndView showAllCallspage(){
 		ModelAndView modelAndView = new ModelAndView();
 		ResourceSet<Call> callList = callService.getAllCalls();

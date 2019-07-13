@@ -52,7 +52,7 @@
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
 		</dependency>
-		
+
 		<!-- thymeleaf -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -94,6 +94,7 @@
 			<version>7.0</version> <!-- Put here the version of your Java EE app, in my case 7.0 -->
 			<scope>provided</scope>
 		</dependency>
+		
 	</dependencies>
 
 	<build>

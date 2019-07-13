@@ -1,23 +1,84 @@
-
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">  
-<head>  
-      
-    <title>Home</title>  
-</head>  
-<body>  
-<div th:replace="fragments/navbar :: navbar"></div>
-    <div class="container">
-		This demo will show-case following functionalities, click on
-		corresponding menu link for further details.
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>communiQ</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+	<!-- header part -->
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">communiQ</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#">Home</a></li>
+				<li><a href="#">Calls</a></li>
+			</ul>
+		</div>
+	</nav>
+	<!-- header part ends -->
+	
+	<div class="container">
+		<h3> This demo app have following functionalities </h3>
+	</div>
+	
+	<!-- receive call on a number -->
+	<div class="container">
+		<div class="jumbotron">
+			<h2>Receive programmable voice call on a number</h2>
+			<hr />
 
-		<ul>
-			<li>1. Receive call on number - <a th:href="@{/showmakecall}">Menu 1</a> </li> 
-			<li>2. Call waiting and routing (like call Centre) - <a th:href="@{/showcallcentre}">Menu 2</a></li>
-			<li>3. Identify caller identification like caller id etc - <a th:href="@{/showcallerid}">Menu 3</a></li>
-			<li>4. Divert call on certain number - <a th:href="@{/showcalldivert}">Menu 4</a></li> 
-			<li>5. All Call Details - <a th:href="@{/showcalls}">Menu 5</a></li>
-		</ul>
-	</div>  
-</body>  
+			<h5>If your caller ID is verified (in Twilio system) then you
+				will hear your name.</h5>
+			<form method="POST" action="#" th:action="@{/makecall}"
+				th:object="${callInputModel}">
+				<fieldset>
+					<div>
+						<input type="text" th:field="*{toNumber}"
+							placeholder="Phone Number" />
+						<button type="submit" name="save" th:text="#{call}"></button>
+						<h5>(example format: +911234567890)</h5>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+
+	<!-- Automated call center  -->
+	<div class="container">
+		<div class="jumbotron">
+			<h2>Call waiting and routing (like call Centre)</h2>
+			<hr />
+			<h4>
+				Dial number <label th:text="${twilio_number}"> </label> and follow
+				instructions.
+			</h4>
+		</div>
+	</div>
+
+	<!-- Automated call center  -->
+	<div class="container">
+		<div class="jumbotron">
+			<h3>Caller ID in Twilio System</h3>	<hr />
+			<table class="table" border="1">
+				<tr>
+					<th>Phone Number</th>
+					<th>Caller ID</th>
+				</tr>
+				<tr th:each="contact: ${contactlist} ">
+					<td th:text="${contact.phoneNumber}"></td>
+					<td th:text="${contact.friendlyName}"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+</body>
+
 </html>

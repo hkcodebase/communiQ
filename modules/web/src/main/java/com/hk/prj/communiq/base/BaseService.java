@@ -18,8 +18,8 @@ public abstract class BaseService {
 	@Value("${auth_token}")
 	protected String AUTH_TOKEN;
 	
-	@Value("${from_number}")	
-	protected String From_Number;
+	@Value("${twilio_phone_number}")	
+	protected String twilio_phone_number;
 	
 	@Value("${response_url}")	
 	protected String response_url;

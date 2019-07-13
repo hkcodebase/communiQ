@@ -1,0 +1,16 @@
+server:
+  port: 8082
+  context-path: /communiQ    
+      
+spring:
+  thymeleaf:
+    cache: false        
+
+account_sid: <from twilio>
+auth_token: <from twilio>
+
+twilio_phone_number: <from twilio>
+response_url: <deployed-app-url>/communiQ/generateResponseByNumber
+redirect_url: <deployed-app-url>/communiQ/redirectResponse
+
+customer_care_number: <any number where you want to receive call>
