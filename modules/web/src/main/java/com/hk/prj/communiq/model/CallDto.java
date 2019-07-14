@@ -1,13 +1,9 @@
 package com.hk.prj.communiq.model;
 
-public class CallInputModel {
+public class CallDto {
 
 	String toNumber;
 	String friendlyName;
-
-	public CallInputModel(){
-		
-	}
 	
 	public String getToNumber() {
 		return toNumber;

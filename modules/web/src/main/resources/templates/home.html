@@ -17,17 +17,17 @@
 				<a class="navbar-brand" href="#">communiQ</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">Home</a></li>
-				<li><a href="#">Calls</a></li>
+				<li class="active"><a th:href="@{/home}">Home</a></li>
+				<li><a th:href="@{/calls}">All Calls</a></li>
 			</ul>
 		</div>
 	</nav>
 	<!-- header part ends -->
-	
+
 	<div class="container">
-		<h3> This demo app have following functionalities </h3>
+		<h3>This demo app have following functionalities</h3>
 	</div>
-	
+
 	<!-- receive call on a number -->
 	<div class="container">
 		<div class="jumbotron">
@@ -36,19 +36,24 @@
 
 			<h5>If your caller ID is verified (in Twilio system) then you
 				will hear your name.</h5>
-			<form method="POST" action="#" th:action="@{/makecall}"
-				th:object="${callInputModel}">
+			<form id="call-form">
 				<fieldset>
 					<div>
-						<input type="text" th:field="*{toNumber}"
-							placeholder="Phone Number" />
-						<button type="submit" name="save" th:text="#{call}"></button>
+						<input type="text" id="toNumber" placeholder="Phone Number" />
+						<button type="submit" name="save" th:text="#{call}"
+							id="call-button"></button>
 						<h5>(example format: +911234567890)</h5>
 					</div>
 				</fieldset>
 			</form>
+
+			<div id="call-detail"></div>
+
 		</div>
+
 	</div>
+
+
 
 	<!-- Automated call center  -->
 	<div class="container">
@@ -65,7 +70,8 @@
 	<!-- Automated call center  -->
 	<div class="container">
 		<div class="jumbotron">
-			<h3>Caller ID in Twilio System</h3>	<hr />
+			<h3>Caller ID in Twilio System</h3>
+			<hr />
 			<table class="table" border="1">
 				<tr>
 					<th>Phone Number</th>
@@ -78,6 +84,7 @@
 			</table>
 		</div>
 	</div>
+	<script th:src="@{/js/call.js}"></script>
 
 </body>
 

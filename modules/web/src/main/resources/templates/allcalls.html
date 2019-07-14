@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>communiQ</title>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"/>
-  <script th:src="@{/js/jquery.min.js}"></script>
-  <script th:src="@{/js/bootstrap.min.js}"></script>
+<title>communiQ</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<!-- header part -->
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">communiQ</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Calls</a></li>
-    </ul>
-  </div>
-</nav>
-<!-- header part ends -->
- 	<div class="container">
+	<!-- header part -->
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">communiQ</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class="active"><a th:href="@{/home}">Home</a></li>
+				<li><a th:href="@{/calls}">All Calls</a></li>
+			</ul>
+		</div>
+	</nav>
+	<!-- header part ends -->
+
+	<div class="container">
 		<table class="table">
 			<tr>
 				<th>Call From</th>
@@ -30,12 +32,12 @@
 				<th>Status</th>
 				<th>Start Time</th>
 			</tr>
-				<tr th:each="call: ${calls}">
-					<td th:text="${call.from}"></td>
-					<td th:text ="${call.to}"></td>
-					<td th:text="${call.status}"></td>
-					<td th:text="${call.startTime}"></td>
-				</tr>
+			<tr th:each="call: ${calls}">
+				<td th:text="${call.from}"></td>
+				<td th:text="${call.to}"></td>
+				<td th:text="${call.status}"></td>
+				<td th:text="${call.startTime}"></td>
+			</tr>
 		</table>
 	</div>
 </body>

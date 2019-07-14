@@ -1,21 +1,24 @@
 package com.hk.prj.communiq.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hk.prj.communiq.base.BaseService;
-import com.hk.prj.communiq.model.CallInputModel;
+import com.hk.prj.communiq.constant.ResponseConstant;
+import com.hk.prj.communiq.model.CallDto;
 import com.hk.prj.communiq.service.CallService;
-import com.twilio.base.ResourceSet;
 import com.twilio.http.HttpMethod;
 import com.twilio.rest.api.v2010.account.Call;
 import com.twilio.rest.api.v2010.account.OutgoingCallerId;
@@ -28,46 +31,46 @@ import com.twilio.twiml.voice.Say;
 
 @Controller
 public class CallController extends BaseService{
-	
+
 	@Autowired
 	CallService callService;
 
-	@RequestMapping("/showmakecall")
-	public ModelAndView showMakeCallPage(){
-		ModelAndView modelAndView = new ModelAndView();		
-		modelAndView.getModel().put("callInputModel", new CallInputModel());
-		modelAndView.setViewName("makecallpage");
-		return modelAndView;
+	@RequestMapping("/")
+	public String index(Model model) {
+		return "redirect:/home";
 	}
-
-	@RequestMapping("/makecall")
-	public ModelAndView makeCall(@ModelAttribute ("callInputModel") CallInputModel callInputModel, BindingResult result){
+	
+	@RequestMapping(value={"/home"})
+	public ModelAndView home(){
 		ModelAndView modelAndView = new ModelAndView();
-		Call call;
-		try {
-			call = callService.makeCall(callInputModel.getToNumber());
+		modelAndView.getModel().put("callInputModel", new CallDto());
+		modelAndView.getModel().put("twilio_number", twilio_phone_number);
+		List<OutgoingCallerId> contactlist = callService.getAllContacts();
+		modelAndView.getModel().put("contactlist", contactlist);
+		modelAndView.setViewName("home");
+		return modelAndView;
+	}
+	
+	@PostMapping("/makecall")
+	public ResponseEntity<Call> makeCall(@RequestBody String toNumber) throws Exception{
+		Call call = callService.makeCall(toNumber);
 
-			if(null!=call){
-				modelAndView.getModel().put("call", call);
-			}
-			else{
-
-			}
-			modelAndView.setViewName("call");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(null!=call){
+			return new ResponseEntity<>(call, HttpStatus.OK);
 		}
-		return modelAndView;
-	}
+		else{
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}		
 
-	@RequestMapping("/showcallcentre")
-	public ModelAndView showCallCenterPage(){
-		ModelAndView modelAndView = new ModelAndView();		
-		modelAndView.setViewName("callcentrepage");
+	@GetMapping("/calls")
+	public ModelAndView calls() throws Exception{
+		ModelAndView modelAndView = new ModelAndView("allcalls");
+		modelAndView.getModel().put("calls", callService.getAllCalls());
 		return modelAndView;
+				
 	}
-
+	
 	@PostMapping(value="/handlecall",produces="application/xml")
 	@ResponseBody
 	public String handleCallPage(){ 
@@ -97,7 +100,7 @@ public class CallController extends BaseService{
 		StringBuilder str = new StringBuilder();
 		str.append("Hello");
 		str.append(outgoingCallerId.getFriendlyName());
-		str.append("I am calling from Demo App!");
+		str.append("I am calling from CommuniQ");
 
 		VoiceResponse twiml = new VoiceResponse.Builder()
 				.say(new Say.Builder(str.toString())
@@ -112,51 +115,39 @@ public class CallController extends BaseService{
 	public String handleCallAndRedirectPage(){ 
 		VoiceResponse.Builder builder = new VoiceResponse.Builder();
 		builder.say(new Say.Builder(
-				String.format("Thank you for calling to our demo app, please press 1 for a laugh. Press 2 for hello, Press 3 to redirect to redirect customer care ")).build());
+				String.format(ResponseConstant.DEFAULT_RESPONSE)).build());
 
 		builder.gather(new Gather.Builder()
 				.numDigits(1)
-				.action("/laugh")
+				.action("/yourInfo")
 				.method(HttpMethod.POST)
 				.numDigits(2)
-				.action("/sayhello")
+				.action("/new-request")
 				.method(HttpMethod.POST)
 				.numDigits(3)
 				.action("/customercare")
 				.method(HttpMethod.POST)
 				.build());
-
-		/*builder.gather(new Gather.Builder()
-				.numDigits(2)
-				.action("/sayhello")
-				.method(HttpMethod.POST)
-				.build());
-
-		builder.gather(new Gather.Builder()
-				.numDigits(3)
-				.action("/customercare")
-				.method(HttpMethod.POST)
-				.build());*/
 
 		return builder.build().toXml();
 	}
 
-	@PostMapping(value="/laugh",produces="application/xml")
+	@PostMapping(value="/yourInfo",produces="application/xml")
 	@ResponseBody
 	public String laugh(){ 		
 		VoiceResponse twiml = new VoiceResponse.Builder()
-				.say(new Say.Builder("ha ha ha ha ha ha ha!")
+				.say(new Say.Builder("you are a good man")
 						.voice(Say.Voice.ALICE)
 						.build())
 				.build();
 		return twiml.toXml();
 	}
 
-	@PostMapping(value="/sayhello",produces="application/xml")
+	@PostMapping(value="/new-request",produces="application/xml")
 	@ResponseBody
 	public String sayHello(){ 		
 		VoiceResponse twiml = new VoiceResponse.Builder()
-				.say(new Say.Builder("hello hello hello")
+				.say(new Say.Builder("please request")
 						.voice(Say.Voice.ALICE)
 						.build())
 				.build();
@@ -191,44 +182,10 @@ public class CallController extends BaseService{
 		return twiml.toXml();
 	}
 
-
-
-	@RequestMapping("/showcallerid")
-	public ModelAndView showCallerIdPage(){
-		ModelAndView modelAndView = new ModelAndView();	
-
-		List<OutgoingCallerId> contactlist = callService.getAllContacts();
-		modelAndView.getModel().put("contactlist", contactlist);
-		modelAndView.getModel().put("callInputModel", new CallInputModel());
-		modelAndView.setViewName("calleridpage");
-		return modelAndView;
-	}
-
-	@RequestMapping("/showcalldivert")
-	public ModelAndView showCallerDivertPage(){
-		ModelAndView modelAndView = new ModelAndView();		
-		modelAndView.setViewName("calldivert");
-		return modelAndView;
-	}
-
-	@RequestMapping("/calls")
-	public ModelAndView showAllCallspage(){
-		ModelAndView modelAndView = new ModelAndView();
-		ResourceSet<Call> callList = callService.getAllCalls();
-		List<Call> calls = new ArrayList<>();		
-		callList.forEach(c->calls.add(c));
-		modelAndView.getModel().put("calls", calls);
-		modelAndView.setViewName("allcalls");
-		return modelAndView;
-	}
-
 	@PostMapping("/addNumberToVerifyList")
-	public ModelAndView addNumberToverifyList(@ModelAttribute ("callInputModel") CallInputModel callInputModel, BindingResult result){
-		ModelAndView modelAndView = new ModelAndView();		
-		String response = callService.addNumberToverifyList(callInputModel.getToNumber(), callInputModel.getFriendlyName());
-		modelAndView.getModel().put("response", response);
-		modelAndView.setViewName("calleridpage");
-		return modelAndView;
+	public ResponseEntity<List<OutgoingCallerId>> addNumberToverifyList(@ModelAttribute ("callInputModel") CallDto callInputModel){
+		callService.addNumberToverifyList(callInputModel.getToNumber(), callInputModel.getFriendlyName());
+		return new ResponseEntity<>(callService.getAllContacts(), HttpStatus.OK);
 	}
 }
 
