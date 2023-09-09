@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.hk.prj.communiq.base.BaseService;
+import com.hk.prj.communiq.base.TwilioService;
 import com.twilio.Twilio;
 import com.twilio.base.ResourceSet;
 import com.twilio.rest.api.v2010.account.Call;
@@ -17,7 +17,7 @@ import com.twilio.rest.api.v2010.account.ValidationRequest;
 import com.twilio.type.PhoneNumber;
 
 @Service
-public class CallService extends BaseService {
+public class CallService extends TwilioService {
 
 	public Call makeCall(String toNumber) throws Exception{
 		Call call = null;

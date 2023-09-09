@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.hk.prj.communiq.base.BaseService;
+import com.hk.prj.communiq.base.TwilioService;
 import com.hk.prj.communiq.constant.ResponseConstant;
 import com.hk.prj.communiq.model.CallDto;
 import com.hk.prj.communiq.service.CallService;
@@ -30,10 +31,13 @@ import com.twilio.twiml.voice.Redirect;
 import com.twilio.twiml.voice.Say;
 
 @Controller
-public class CallController extends BaseService{
+public class CallController {
 
 	@Autowired
-	CallService callService;
+	private CallService callService;
+
+	@Autowired
+	private TwilioService twilioService;
 
 	@RequestMapping("/")
 	public String index(Model model) {
@@ -44,7 +48,7 @@ public class CallController extends BaseService{
 	public ModelAndView home(){
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.getModel().put("callInputModel", new CallDto());
-		modelAndView.getModel().put("twilio_number", twilio_phone_number);
+		modelAndView.getModel().put("twilio_number", twilioService.getTwilioPhoneNumber());
 		List<OutgoingCallerId> contactlist = callService.getAllContacts();
 		modelAndView.getModel().put("contactlist", contactlist);
 		modelAndView.setViewName("home");
@@ -161,9 +165,9 @@ public class CallController extends BaseService{
 		String sayMessage = String.format("you are redirected to customer care.. please wait");
 		builder.say(new Say.Builder(sayMessage).build());
 
-		Number number = new Number.Builder(customer_care_number).build();
+		Number number = new Number.Builder(twilioService.getCustomerCareNumber()).build();
 		Dial dial = new Dial.Builder().number(number).build();
-		Redirect redirect = new Redirect.Builder(redirect_url)
+		Redirect redirect = new Redirect.Builder(twilioService.getRedirectUrl())
 				.build();
 		builder.dial(dial)
 		.redirect(redirect).build();
