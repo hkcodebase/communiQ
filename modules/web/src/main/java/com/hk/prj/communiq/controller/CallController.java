@@ -2,6 +2,7 @@ package com.hk.prj.communiq.controller;
 
 import java.util.List;
 
+import com.hk.prj.communiq.service.CallResponseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +38,9 @@ public class CallController {
 
 	@Autowired
 	private TwilioService twilioService;
+
+	@Autowired
+	private CallResponseService callResponseService;
 
 	@RequestMapping("/")
 	public String index(Model model) {
@@ -76,13 +80,9 @@ public class CallController {
 	
 	@PostMapping(value="/handlecall",produces="application/xml")
 	@ResponseBody
-	public String handleCallPage(){ 
-		VoiceResponse twiml = new VoiceResponse.Builder()
-				.say(new Say.Builder("Hello world!")
-						.voice(Say.Voice.ALICE)
-						.build())
-				.build();
-		return twiml.toXml();
+	public String handleCallPage(){
+		return callResponseService.generateCallResponse();
+
 	}
 
 	@PostMapping(value="/generateResponse",produces="application/xml")
