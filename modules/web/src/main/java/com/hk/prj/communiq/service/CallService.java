@@ -43,13 +43,6 @@ public class CallService extends TwilioService {
 		return calls;
 	}
 
-	public OutgoingCallerId getOutgoingCallerId(String id) {
-		initializeTwiliorestClient();
-		OutgoingCallerId outgoingCallerId = OutgoingCallerId.fetcher(id)
-				.fetch();
-		return outgoingCallerId;
-	}
-
 	public OutgoingCallerId getOutgoingCallerIdByNumber(String toNumber) {
 		initializeTwiliorestClient();
 		PhoneNumber  phoneNumber = new PhoneNumber(toNumber);
@@ -73,7 +66,7 @@ public class CallService extends TwilioService {
 	public String addNumberToverifyList(String toNumber, String friendlyName) {
 		initializeTwiliorestClient();
 		ValidationRequest validationRequest = ValidationRequest.creator(
-				new com.twilio.type.PhoneNumber(toNumber))
+				new PhoneNumber(toNumber))
 				.setFriendlyName(friendlyName)
 				.create();
 		if(null!=validationRequest){
